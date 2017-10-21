@@ -8,13 +8,26 @@ function main(n) {
            return i + 1;
         });
 
-    const squares = numbers.map((x) => x * x);
+    const squares = numbers.map((x) => square(x));
     const sumOfSquares = squares.reduce((a, b) => a + b);
 
-    const sumOfNumbers = n * (n + 1) / 2;
-    const squareOfSum = sumOfNumbers * sumOfNumbers;
+    const sumOfNumbers = numbers.reduce((a, b) => a + b);
+    const squareOfSum = square(sumOfNumbers);
 
     return Math.abs(sumOfSquares - squareOfSum);
 }
 
- console.log(main(100));
+// much more efficient
+function main2(n) {
+    const sumOfSquares = n * (n + 1) * (2 * n + 1) / 6;
+    const squareOfSum = square(n * (n + 1) / 2);
+
+    return Math.abs(sumOfSquares - squareOfSum);
+}
+
+function square(n) {
+    return Math.pow(n, 2);
+}
+
+console.log(main(1000000));
+console.log(main2(1000000));
